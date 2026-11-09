@@ -1,0 +1,82 @@
+ layout  | october_events 
+---------+----------------
+ plain   |          40889
+ monthly |          40889
+(2 rows)
+
+                                                                              QUERY PLAN                                                                              
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=1739.17..1739.18 rows=1 width=8) (actual time=8.744..8.745 rows=1 loops=1)
+   Buffers: shared hit=198
+   ->  Index Only Scan using validations_plain_pkey on validations_plain  (cost=0.42..1636.20 rows=41189 width=0) (actual time=0.047..5.905 rows=40889 loops=1)
+         Index Cond: ((validated_utc >= '2026-10-01 00:00:00+00'::timestamp with time zone) AND (validated_utc < '2026-11-01 00:00:00+00'::timestamp with time zone))
+         Heap Fetches: 0
+         Buffers: shared hit=198
+ Planning Time: 0.148 ms
+ Execution Time: 8.780 ms
+(8 rows)
+
+                                                                            QUERY PLAN                                                                            
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=976.56..976.57 rows=1 width=8) (actual time=14.095..14.098 rows=1 loops=1)
+   Buffers: shared hit=261
+   ->  Seq Scan on validations_oct validations_by_month  (cost=0.00..874.33 rows=40889 width=0) (actual time=0.011..9.745 rows=40889 loops=1)
+         Filter: ((validated_utc >= '2026-10-01 00:00:00+00'::timestamp with time zone) AND (validated_utc < '2026-11-01 00:00:00+00'::timestamp with time zone))
+         Buffers: shared hit=261
+ Planning:
+   Buffers: shared hit=6
+ Planning Time: 0.264 ms
+ Execution Time: 14.129 ms
+(9 rows)
+
+ layout  | ticket_100_events 
+---------+-------------------
+ plain   |                12
+ monthly |                12
+(2 rows)
+
+ different_ticket_history_rows 
+-------------------------------
+                             0
+(1 row)
+
+                                                      QUERY PLAN                                                       
+-----------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=2265.22..2265.25 rows=12 width=24) (actual time=7.607..7.610 rows=12 loops=1)
+   Sort Key: validated_utc, id
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=771
+   ->  Seq Scan on validations_plain  (cost=0.00..2265.00 rows=12 width=24) (actual time=0.020..7.428 rows=12 loops=1)
+         Filter: (ticket_id = 100)
+         Rows Removed by Filter: 119988
+         Buffers: shared hit=765
+ Planning:
+   Buffers: shared hit=5
+ Planning Time: 0.219 ms
+ Execution Time: 7.638 ms
+(12 rows)
+
+                                                                  QUERY PLAN                                                                   
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=2266.28..2266.31 rows=12 width=24) (actual time=8.497..8.502 rows=12 loops=1)
+   Sort Key: validations_by_month.validated_utc, validations_by_month.id
+   Sort Method: quicksort  Memory: 25kB
+   Buffers: shared hit=766
+   ->  Append  (cost=0.00..2266.06 rows=12 width=24) (actual time=0.019..8.479 rows=12 loops=1)
+         Buffers: shared hit=766
+         ->  Seq Scan on validations_sep validations_by_month_1  (cost=0.00..747.62 rows=4 width=24) (actual time=0.018..3.105 rows=4 loops=1)
+               Filter: (ticket_id = 100)
+               Rows Removed by Filter: 39566
+               Buffers: shared hit=253
+         ->  Seq Scan on validations_oct validations_by_month_2  (cost=0.00..772.11 rows=4 width=24) (actual time=0.837..2.550 rows=3 loops=1)
+               Filter: (ticket_id = 100)
+               Rows Removed by Filter: 40886
+               Buffers: shared hit=261
+         ->  Seq Scan on validations_nov validations_by_month_3  (cost=0.00..746.26 rows=4 width=24) (actual time=0.191..2.810 rows=5 loops=1)
+               Filter: (ticket_id = 100)
+               Rows Removed by Filter: 39536
+               Buffers: shared hit=252
+ Planning Time: 0.276 ms
+ Execution Time: 8.543 ms
+(20 rows)
+

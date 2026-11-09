@@ -1,0 +1,102 @@
+Query: baseline | Route: R-0 | UTC day: 2026-10-23
+Warm-up (not recorded)
+
+Measured run 1
+                                                                               QUERY PLAN                                                                                
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3712.25..3712.30 rows=20 width=30) (actual time=19.331..19.340 rows=20 loops=1)
+   Buffers: shared hit=1007
+   ->  Sort  (cost=3712.25..3713.29 rows=416 width=30) (actual time=19.328..19.333 rows=20 loops=1)
+         Sort Key: scheduled_departure_utc, id
+         Sort Method: top-N heapsort  Memory: 27kB
+         Buffers: shared hit=1007
+         ->  Seq Scan on trips  (cost=0.00..3701.18 rows=416 width=30) (actual time=0.016..19.145 rows=991 loops=1)
+               Filter: ((route_id = 'R-0'::text) AND (status = 'Scheduled'::text) AND (((scheduled_departure_utc AT TIME ZONE 'UTC'::text))::date = '2026-10-23'::date))
+               Rows Removed by Filter: 119017
+               Buffers: shared hit=1001
+ Planning:
+   Buffers: shared hit=97
+ Planning Time: 0.328 ms
+ Execution Time: 19.372 ms
+(14 rows)
+
+
+Measured run 2
+                                                                               QUERY PLAN                                                                                
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3712.25..3712.30 rows=20 width=30) (actual time=15.818..15.824 rows=20 loops=1)
+   Buffers: shared hit=1007
+   ->  Sort  (cost=3712.25..3713.29 rows=416 width=30) (actual time=15.816..15.819 rows=20 loops=1)
+         Sort Key: scheduled_departure_utc, id
+         Sort Method: top-N heapsort  Memory: 27kB
+         Buffers: shared hit=1007
+         ->  Seq Scan on trips  (cost=0.00..3701.18 rows=416 width=30) (actual time=0.018..15.619 rows=991 loops=1)
+               Filter: ((route_id = 'R-0'::text) AND (status = 'Scheduled'::text) AND (((scheduled_departure_utc AT TIME ZONE 'UTC'::text))::date = '2026-10-23'::date))
+               Rows Removed by Filter: 119017
+               Buffers: shared hit=1001
+ Planning:
+   Buffers: shared hit=97
+ Planning Time: 0.332 ms
+ Execution Time: 15.852 ms
+(14 rows)
+
+
+Measured run 3
+                                                                               QUERY PLAN                                                                                
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3712.25..3712.30 rows=20 width=30) (actual time=13.618..13.622 rows=20 loops=1)
+   Buffers: shared hit=1007
+   ->  Sort  (cost=3712.25..3713.29 rows=416 width=30) (actual time=13.617..13.618 rows=20 loops=1)
+         Sort Key: scheduled_departure_utc, id
+         Sort Method: top-N heapsort  Memory: 27kB
+         Buffers: shared hit=1007
+         ->  Seq Scan on trips  (cost=0.00..3701.18 rows=416 width=30) (actual time=0.017..13.487 rows=991 loops=1)
+               Filter: ((route_id = 'R-0'::text) AND (status = 'Scheduled'::text) AND (((scheduled_departure_utc AT TIME ZONE 'UTC'::text))::date = '2026-10-23'::date))
+               Rows Removed by Filter: 119017
+               Buffers: shared hit=1001
+ Planning:
+   Buffers: shared hit=97
+ Planning Time: 0.440 ms
+ Execution Time: 13.648 ms
+(14 rows)
+
+
+Measured run 4
+                                                                               QUERY PLAN                                                                                
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3712.25..3712.30 rows=20 width=30) (actual time=14.319..14.323 rows=20 loops=1)
+   Buffers: shared hit=1007
+   ->  Sort  (cost=3712.25..3713.29 rows=416 width=30) (actual time=14.316..14.319 rows=20 loops=1)
+         Sort Key: scheduled_departure_utc, id
+         Sort Method: top-N heapsort  Memory: 27kB
+         Buffers: shared hit=1007
+         ->  Seq Scan on trips  (cost=0.00..3701.18 rows=416 width=30) (actual time=0.017..14.158 rows=991 loops=1)
+               Filter: ((route_id = 'R-0'::text) AND (status = 'Scheduled'::text) AND (((scheduled_departure_utc AT TIME ZONE 'UTC'::text))::date = '2026-10-23'::date))
+               Rows Removed by Filter: 119017
+               Buffers: shared hit=1001
+ Planning:
+   Buffers: shared hit=97
+ Planning Time: 0.308 ms
+ Execution Time: 14.352 ms
+(14 rows)
+
+
+Measured run 5
+                                                                               QUERY PLAN                                                                                
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3712.25..3712.30 rows=20 width=30) (actual time=16.673..16.678 rows=20 loops=1)
+   Buffers: shared hit=1007
+   ->  Sort  (cost=3712.25..3713.29 rows=416 width=30) (actual time=16.671..16.674 rows=20 loops=1)
+         Sort Key: scheduled_departure_utc, id
+         Sort Method: top-N heapsort  Memory: 27kB
+         Buffers: shared hit=1007
+         ->  Seq Scan on trips  (cost=0.00..3701.18 rows=416 width=30) (actual time=0.025..16.488 rows=991 loops=1)
+               Filter: ((route_id = 'R-0'::text) AND (status = 'Scheduled'::text) AND (((scheduled_departure_utc AT TIME ZONE 'UTC'::text))::date = '2026-10-23'::date))
+               Rows Removed by Filter: 119017
+               Buffers: shared hit=1001
+ Planning:
+   Buffers: shared hit=97
+ Planning Time: 0.325 ms
+ Execution Time: 16.709 ms
+(14 rows)
+

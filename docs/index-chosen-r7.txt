@@ -1,0 +1,77 @@
+Query: candidate | Route: R-7 | UTC day: 2026-10-23
+Warm-up (not recorded)
+
+Measured run 1
+                                                                                                      QUERY PLAN                                                                                                       
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=0.42..69.31 rows=20 width=30) (actual time=0.057..0.177 rows=20 loops=1)
+   Buffers: shared hit=23
+   ->  Index Scan using trips_route_departure_idx on trips  (cost=0.42..107.21 rows=31 width=30) (actual time=0.055..0.172 rows=20 loops=1)
+         Index Cond: ((route_id = 'R-7'::text) AND (scheduled_departure_utc >= '2026-10-23 00:00:00+00'::timestamp with time zone) AND (scheduled_departure_utc < '2026-10-24 00:00:00+00'::timestamp with time zone))
+         Buffers: shared hit=23
+ Planning:
+   Buffers: shared hit=129
+ Planning Time: 0.889 ms
+ Execution Time: 0.208 ms
+(9 rows)
+
+
+Measured run 2
+                                                                                                      QUERY PLAN                                                                                                       
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=0.42..69.31 rows=20 width=30) (actual time=0.049..0.137 rows=20 loops=1)
+   Buffers: shared hit=23
+   ->  Index Scan using trips_route_departure_idx on trips  (cost=0.42..107.21 rows=31 width=30) (actual time=0.048..0.133 rows=20 loops=1)
+         Index Cond: ((route_id = 'R-7'::text) AND (scheduled_departure_utc >= '2026-10-23 00:00:00+00'::timestamp with time zone) AND (scheduled_departure_utc < '2026-10-24 00:00:00+00'::timestamp with time zone))
+         Buffers: shared hit=23
+ Planning:
+   Buffers: shared hit=129
+ Planning Time: 0.497 ms
+ Execution Time: 0.163 ms
+(9 rows)
+
+
+Measured run 3
+                                                                                                      QUERY PLAN                                                                                                       
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=0.42..69.31 rows=20 width=30) (actual time=0.083..0.172 rows=20 loops=1)
+   Buffers: shared hit=23
+   ->  Index Scan using trips_route_departure_idx on trips  (cost=0.42..107.21 rows=31 width=30) (actual time=0.081..0.167 rows=20 loops=1)
+         Index Cond: ((route_id = 'R-7'::text) AND (scheduled_departure_utc >= '2026-10-23 00:00:00+00'::timestamp with time zone) AND (scheduled_departure_utc < '2026-10-24 00:00:00+00'::timestamp with time zone))
+         Buffers: shared hit=23
+ Planning:
+   Buffers: shared hit=129
+ Planning Time: 0.575 ms
+ Execution Time: 0.223 ms
+(9 rows)
+
+
+Measured run 4
+                                                                                                      QUERY PLAN                                                                                                       
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=0.42..69.31 rows=20 width=30) (actual time=0.092..0.377 rows=20 loops=1)
+   Buffers: shared hit=23
+   ->  Index Scan using trips_route_departure_idx on trips  (cost=0.42..107.21 rows=31 width=30) (actual time=0.090..0.371 rows=20 loops=1)
+         Index Cond: ((route_id = 'R-7'::text) AND (scheduled_departure_utc >= '2026-10-23 00:00:00+00'::timestamp with time zone) AND (scheduled_departure_utc < '2026-10-24 00:00:00+00'::timestamp with time zone))
+         Buffers: shared hit=23
+ Planning:
+   Buffers: shared hit=129
+ Planning Time: 0.815 ms
+ Execution Time: 0.411 ms
+(9 rows)
+
+
+Measured run 5
+                                                                                                      QUERY PLAN                                                                                                       
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=0.42..69.31 rows=20 width=30) (actual time=0.054..0.162 rows=20 loops=1)
+   Buffers: shared hit=23
+   ->  Index Scan using trips_route_departure_idx on trips  (cost=0.42..107.21 rows=31 width=30) (actual time=0.053..0.157 rows=20 loops=1)
+         Index Cond: ((route_id = 'R-7'::text) AND (scheduled_departure_utc >= '2026-10-23 00:00:00+00'::timestamp with time zone) AND (scheduled_departure_utc < '2026-10-24 00:00:00+00'::timestamp with time zone))
+         Buffers: shared hit=23
+ Planning:
+   Buffers: shared hit=129
+ Planning Time: 0.558 ms
+ Execution Time: 0.192 ms
+(9 rows)
+
